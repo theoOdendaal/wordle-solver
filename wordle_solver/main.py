@@ -28,19 +28,17 @@ if __name__ == '__main__':
     df_words = pd.read_csv(Path(script_path, file_name), sep = '|')
     df_words = df_words.astype(str)
     
-    #model = PartitioningRateSolver(df_words['word'].tolist())
-    #model.solve()
-    #results = [[key, val] for key, val in zip(model.population, model.results)]
-    #results = sorted(results, key=lambda x: (x[1]))
-    #print(results)
-    #input("")
+    model = PartitioningRateSolver(df_words['word'].tolist())
+    model.solve()
+    results = [[key, val] for key, val in zip(model.population, model.results)]
+    results = sorted(results, key=lambda x: (x[1]))
     
-    organize_method = MaxUnknown
-    residual_method = ResidualPotentialAnswers
+    organize_method = WordFrequency # MaxUnknown, WordFrequency
+    residual_method = ResidualPotentialAnswers # ResidualPotentialAnswers, PartitioningRateSolver
     
          
     population = initial_transformation(df_words['word'].tolist(), WORD_LENGTH)
-    population = residual_method(population=population)
+    #population = residual_method(population=population)
     print(organize_method.organize(population.population, word_length=WORD_LENGTH).head(10))
     
     while True:
