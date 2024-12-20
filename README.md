@@ -1,2 +1,2 @@
 # wordle-solver
- Command line worlde solver
+ Command line wordle solver
